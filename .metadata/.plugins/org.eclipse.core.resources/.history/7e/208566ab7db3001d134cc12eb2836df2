@@ -1,0 +1,49 @@
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Redbus {
+
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver", "E:\\Selenium\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+
+		driver.get("https://www.redbus.in/");
+		String RedbusURL = driver.getCurrentUrl();
+		System.out.println(RedbusURL);
+
+		if ("https://www.redbus.in/".equals(RedbusURL)) {
+			System.out.println("The URL matched");
+		} else {
+			System.out.println("URL does not match");
+		}
+
+		driver.findElement(By.xpath("//a[@href='https://www.redbus.in/railways']")).click();
+		WebElement From = driver.findElement(By.xpath("//input[@id='src']"));
+		From.sendKeys("Koyembedu");
+		From.sendKeys(Keys.ARROW_DOWN);
+		From.sendKeys(Keys.ENTER);
+		System.out.println("From Location is Entered" + From);
+
+		WebElement To = driver.findElement(By.xpath("//input[@id='dst']"));
+		To.sendKeys("Thiruvananthapuram" + Keys.ENTER);
+		From.sendKeys(Keys.ARROW_DOWN);
+		From.sendKeys(Keys.ENTER);
+		System.out.println("To Location is Entered" + To);
+
+		WebElement ClickDate = driver.findElement(By.xpath("//span[@class='home_date_day']"));
+		ClickDate.click();
+
+		WebElement SelectDate = driver.findElement(By.xpath("//span[@class='sc-htoDjs iZbCio']"));
+		SelectDate.click();
+
+		WebElement SearchBuses = driver.findElement(By.xpath("//button[normalize-space()='SEARCH TRAINS']"));
+		SearchBuses.click();
+		SearchBuses.sendKeys(Keys.ENTER);
+	}
+
+}
